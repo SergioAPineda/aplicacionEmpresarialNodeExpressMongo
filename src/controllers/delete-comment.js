@@ -1,3 +1,5 @@
+import { Observable } from "rxjs"
+
 export default function makeDeleteComment ({ removeComment }) {
   return async function deleteComment (httpRequest) {
     const headers = {
@@ -5,6 +7,7 @@ export default function makeDeleteComment ({ removeComment }) {
     }
     try {
       const deleted = await removeComment({ id: httpRequest.params.id })
+
       return {
         headers,
         statusCode: deleted.deletedCount === 0 ? 404 : 200,
