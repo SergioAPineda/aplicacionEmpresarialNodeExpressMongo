@@ -1,3 +1,5 @@
+import { Observable } from "rxjs"
+
 export default function makeGetComments ({ listComments }) {
   return async function getComments (httpRequest) {
     const headers = {
@@ -7,6 +9,15 @@ export default function makeGetComments ({ listComments }) {
       const postComments = await listComments({
         postId: httpRequest.query.postId
       })
+
+      const getCommentsEvent$ = new Observable( subs => {
+
+        subs.next(postComments)
+
+      })
+
+      getCommentsEvent$.subscribe(res => console.log("Se ha lanzando una solicitud para listar los comentarios del Id: "));
+
       return {
         headers,
         statusCode: 200,

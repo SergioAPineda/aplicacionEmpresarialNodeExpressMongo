@@ -153,7 +153,7 @@ describe('Comments API', () => {
           createdOn: inserts[1].createdOn
         }
       ]
-      const response = await axios.get('/getAllcomments')
+      const response = await axios.get('/Allcomments')
       expect(response.data).toContainEqual(expected[0])
       expect(response.data).toContainEqual(expected[1])
       return comments.map(commentsDb.remove)

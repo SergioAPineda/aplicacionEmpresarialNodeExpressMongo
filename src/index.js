@@ -34,7 +34,7 @@ app.use(makeCallback(notFound))
 
   // listen for requests
   app.listen(3000, () => {
-    console.log('Server is listening on port 3000')
+    console.log('Servidor local funcionando en el puerto 3000')
   })
 
 
