@@ -6,7 +6,8 @@ import {
   getComments,
   notFound,
   postComment,
-  patchComment
+  patchComment,
+  getAllComments
 } from './controllers'
 import makeCallback from './express-callback'
 
@@ -27,6 +28,7 @@ app.delete(`${apiRoot}/comments`, makeCallback(deleteComment))
 app.patch(`${apiRoot}/comments/:id`, makeCallback(patchComment))
 app.patch(`${apiRoot}/comments`, makeCallback(patchComment))
 app.get(`${apiRoot}/comments`, makeCallback(getComments))
+app.get(`${apiRoot}/allComments`, makeCallback(getAllComments))
 app.use(makeCallback(notFound))
 
 

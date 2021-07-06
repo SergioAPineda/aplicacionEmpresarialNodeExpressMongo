@@ -133,6 +133,31 @@ describe('Comments API', () => {
       expect(response.data).toContainEqual(expected[1])
       return comments.map(commentsDb.remove)
     })
+    it('list all comments for a post', async () => {
+      const comment1 = makeFakeComment({ replyToId: null })
+      const comment2 = makeFakeComment({
+        postId: comment1.postId,
+        replyToId: null
+      })
+      const comments = [comment1, comment2]
+      const inserts = await Promise.all(comments.map(commentsDb.insert))
+      const expected = [
+        {
+          ...comment1,
+          replies: [],
+          createdOn: inserts[0].createdOn
+        },
+        {
+          ...comment2,
+          replies: [],
+          createdOn: inserts[1].createdOn
+        }
+      ]
+      const response = await axios.get('/getAllcomments')
+      expect(response.data).toContainEqual(expected[0])
+      expect(response.data).toContainEqual(expected[1])
+      return comments.map(commentsDb.remove)
+    })
     it('threads comments', async done => {
       const comment1 = makeFakeComment({ replyToId: null })
       const reply1 = makeFakeComment({
